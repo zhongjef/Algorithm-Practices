@@ -1,7 +1,5 @@
 package com.company;
 
-import com.sun.jdi.connect.spi.TransportService;
-
 class LinkedListNode {
     public LinkedListNode next;
     public int data;
