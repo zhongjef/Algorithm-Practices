@@ -1,6 +1,6 @@
 package com.company;
 
-class Stack<Integer> {
+class Stack {
     public Node top;
 
     public int size;
@@ -21,33 +21,40 @@ class Stack<Integer> {
     }
 
     void push(int data) {
-        int newMin = data < top.min ? data : top.min;
+        int newMin = top == null ? data : Math.min(top.min, data);
         Node newTop = new Node(data, newMin);
         newTop.next = this.top;
         this.top = newTop;
         size += 1;
     }
 
-    int min() {
-        return top.min;
+    Integer min() {
+        if (this.isEmpty()) return null;
+        return this.top.min;
     }
 
     private class Node {
         public int data;
         public Node next;
-        private int min;
+        public int min;
         public Node(int data, int min) {
             this.data = data;
             this.min = min;
-        }
-        public int getMin() {
-            return this.min;
         }
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-	// write your code here
+	    Stack stack = new Stack();
+	    stack.push(1);
+	    stack.push(2);
+	    stack.push(3);
+        System.out.println(stack.min());
+        System.out.println(stack.pop());
+        System.out.println(stack.min());
+        stack.pop();
+        stack.pop();
+        System.out.println(stack.min());
     }
 }
