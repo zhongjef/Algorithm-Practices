@@ -1,11 +1,15 @@
 package com.company;
 
-class Stack {
-    public Node top;
+import java.util.Stack;
 
+/***
+ * First approach, augmenting stack node with a minimum value of current state
+ */
+class MinStack {
+    public Node top;
     public int size;
 
-    public Stack() {
+    public MinStack() {
         this.size = 0;
     }
 
@@ -44,9 +48,74 @@ class Stack {
     }
 }
 
+/***
+ * Two stack augmented, one for data, one for minimum
+ */
+class DoubleStack {
+    private class Node {
+        int data;
+        Node(int data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return Integer.toString(this.data);
+        }
+    }
+
+    Stack<Node> dataStack;
+    Stack<Node> minimumStack;
+
+    public DoubleStack() {
+        dataStack = new Stack<>();
+        minimumStack = new Stack<>();
+    }
+
+    int pop() {
+        if (dataStack.isEmpty()) {
+            return Integer.MAX_VALUE;
+        }
+
+        Node res = dataStack.pop();
+        if (res == minimumStack.peek()) {
+            minimumStack.pop();
+        }
+        return res.data;
+    }
+
+    void push(int data) {
+        Node newNode = new Node(data);
+        dataStack.push(newNode);
+        if (!minimumStack.isEmpty()) {
+            Node currMin = minimumStack.peek();
+            if (currMin.data > data) {
+                minimumStack.push(newNode);
+            }
+        } else {
+            minimumStack.push(newNode);
+        }
+
+    }
+
+    int peek() {
+        if (!dataStack.isEmpty()) {
+            return dataStack.peek().data;
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    int min() {
+        if (!minimumStack.isEmpty()) {
+            return minimumStack.peek().data;
+        }
+        return Integer.MAX_VALUE;
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-	    Stack stack = new Stack();
+	    DoubleStack stack = new DoubleStack();
 	    stack.push(1);
 	    stack.push(2);
 	    stack.push(3);
