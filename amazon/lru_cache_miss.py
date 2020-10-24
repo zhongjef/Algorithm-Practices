@@ -7,12 +7,6 @@ class Node:
         self.prev = None
         self.next = None
 
-    def __eq__(self, node) -> bool:
-        return self.val == node.val
-
-    def __str__(self):
-        return str(self.val)
-
 class DoubleLinkedList:
     def __init__(self, capacity: int):
         # using two dummy node as head and tail
@@ -47,14 +41,6 @@ class DoubleLinkedList:
 
     def isFull(self) -> bool:
         return self.capacity == self.size
-
-    def __str__(self) -> str:
-        curr = self.head
-        res = ""
-        while curr is not None:
-            res += str(curr) + " "
-            curr = curr.next
-        return res
 
 class LRUCache:
     def __init__(self, maxSize: int):
@@ -103,7 +89,7 @@ class Solution:
 
 if __name__ == "__main__":
     num = 6
-    pages = [1, 1, 1, 1, 1, 1]
+    pages = [1, 1, 3, 4, 5, 1]
     maxCacheSize = 2
     sol = Solution()
     res = sol.lruCacheMisses(num, pages, maxCacheSize)
