@@ -23,5 +23,6 @@ class Solution:
         left = self.inorderSuccessor(root.left, p)
         if left != None:
             return left
+        # it is the node looking for
         else:
             return root

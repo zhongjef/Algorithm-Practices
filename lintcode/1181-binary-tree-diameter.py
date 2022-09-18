@@ -19,6 +19,7 @@ class Solution:
             return 0
         left = self.maxDepth(root.left)
         right = self.maxDepth(root.right)
+        # did not left + right + 1 since we count path not number of nodes along path 
         self.max = max(self.max, left + right)
         return max(left, right) + 1
     

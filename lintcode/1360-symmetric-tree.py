@@ -21,7 +21,7 @@ class Solution:
         if left.val != right.val:
             return False
         return self.isSymmetricST(left.left, right.right) and self.isSymmetricST(left.right, right.left)
-    
+
     def isSymmetric(self, root):
         if not root:
             return True
